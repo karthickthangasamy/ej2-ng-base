@@ -1,3 +1,4 @@
-# README #
+A common package of Essential JS 2 base libraries, methods and class definitions.
 
-Repository for Angular Base
+## Resources
+[Demos](http://ej2.syncfusion.com/angular/demos/)  
