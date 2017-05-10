@@ -1,0 +1,62 @@
+{
+	"name": "@syncfusion/ej2-ng-base",
+	"version": "1.0.0",
+	"description": "Syncfusion Angular Base",
+	"author": "Syncfusion Inc.",
+	"license": "SEE LICENSE IN license",
+	"dependencies": {
+		"@angular/common": "2.2.1 - 4.1.0",
+		"@angular/compiler": "2.2.1 - 4.1.0",
+		"@angular/core": "2.2.1 - 4.1.0",
+		"@angular/forms": "2.2.1 - 4.1.0",
+		"@angular/http": "2.2.1 - 4.1.0",
+		"@angular/platform-browser": "2.2.1 - 4.1.0",
+		"@angular/platform-browser-dynamic": "2.2.1 - 4.1.0",
+		"@angular/router": "2.2.1 - 4.1.0",
+		"@syncfusion/ej2-base": "*",
+		"zone.js": "^0.7.2",
+		"core-js": "^2.4.1",
+		"reflect-metadata": "^0.1.9",
+		"rxjs": "^5.0.0"
+	},
+	"devDependencies": {
+		"@types/chai": "^3.4.28",
+		"@types/core-js": "0.9.35",
+		"@types/jasmine": "^2.2.29",
+		"@types/jasmine-ajax": "^3.1.27",
+		"@types/node": "^6.0.46",
+		"@types/requirejs": "^2.1.26",
+		"es6-module-loader": "^0.17.11",
+		"karma-systemjs": "^0.16.0",
+		"systemjs": "^0.19.40",
+		"systemjs-plugin-babel": "0.0.17",
+		"canteen": "^1.0.5",
+		"es6-promise": "^3.2.1",
+		"gulp": "^3.9.1",
+		"jasmine-ajax": "^3.3.1",
+		"jasmine-core": "^2.6.1",
+		"karma": "^1.7.0",
+		"karma-generic-preprocessor": "^1.1.0",
+		"karma-htmlfile-reporter": "^0.3.5",
+		"karma-jasmine": "^1.1.0",
+		"karma-jasmine-ajax": "^0.1.13",
+		"karma-phantomjs-launcher": "^1.0.4",
+		"karma-requirejs": "^1.1.0",
+		"nedb": "^1.8.0",
+		"phantomjs-prebuilt": "^2.1.14",
+		"requirejs": "^2.3.3",
+		"simple-odata-server": "^0.3.1"
+	},
+	"scripts": {
+		"test": "gulp ci-test",
+		"compile": "gulp ci-compile",
+		"ci-publish": "gulp ci-publish"
+	},
+	"config": {
+		"ghooks": {
+			"pre-commit": "gulp pre-commit",
+			"pre-push": "gulp pre-push",
+			"commit-msg": "gulp commit-msg"
+		}
+	}
+}
