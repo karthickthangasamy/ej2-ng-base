@@ -36,7 +36,8 @@ describe('=> Form Component => ', () => {
                             <ej2-button [value]='text' name='button' [ngModel]='text'> </ej2-button>
                             <input type='submit' value='Submit' id='butsubmit'>
                              <pre id='formData'>{{ heroForm.value | json }}</pre>
-                           </form>`
+                           </form>
+                           <input ej2-button />`
             }
         });
         TestBed.compileComponents().then(() => {
@@ -57,6 +58,22 @@ describe('=> Form Component => ', () => {
         let dataJson: string = document.getElementById('formData').innerText;
         expect(JSON.parse(dataJson)).toEqual({ 'fname': 'Sam', 'developer': 'Developer', 'button': 'Employee' });
     });
+
+    it('onFocus and onBlur event call', () => {
+        let fixr = TestBed.createComponent(AppComponent);
+        let instance = de.nativeElement.querySelector('.e-control').ej2_instances[0];
+        let spyFun = jasmine.createSpy('focus');
+        instance.focus = { emit: spyFun };
+        instance.ngOnFocus();
+        expect(spyFun).toHaveBeenCalled();
+        let spyFun1 = jasmine.createSpy('blur');
+        instance.blur = { emit: spyFun1 };
+        instance.ngOnBlur();
+        expect(spyFun1).toHaveBeenCalled();
+    });
+
+
+
 
     // To cover coverage;
 

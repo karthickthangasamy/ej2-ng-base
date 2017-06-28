@@ -1,3 +1,4 @@
+import { EventEmitter, ElementRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 
 /**
@@ -8,6 +9,13 @@ export class FormBase<T> implements ControlValueAccessor {
 
     public propagateChange: (_: T) => void;
     public propagateTouch: () => void;
+
+    public element: HTMLElement;
+    private ngEle: ElementRef;
+    public appendTo: (ele: string | HTMLElement) => void;
+
+    public focus: EventEmitter<Object>;
+    public blur: EventEmitter<Object>;
 
     public localChange(e: { value: T }): void {
         if (this.propagateChange !== undefined) {
@@ -23,8 +31,23 @@ export class FormBase<T> implements ControlValueAccessor {
         this.propagateTouch = registerFunction;
     }
 
+    public ngAfterViewInit(): void {
+        this.appendTo(this.element);
+        if (this.ngEle.nativeElement.nodeName.toLowerCase() !== 'input') {
+            this.element.addEventListener('focus', this.ngOnFocus.bind(this));
+            this.element.addEventListener('blur', this.ngOnBlur.bind(this));
+        }
+    }
+
     public writeValue(value: T): void {
         this.value = value;
     }
 
+    public ngOnFocus(e: Event): void {
+        this.focus.emit(e);
+    }
+
+    public ngOnBlur(e: Event): void {
+        this.blur.emit(e);
+    }
 }

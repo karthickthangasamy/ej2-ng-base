@@ -26,6 +26,14 @@ export class AppComponent {
         // Todo 
     }
 
+    public onFocus(): void {
+        // Todo 
+    }
+
+    public onBlur(): void {
+        // Todo 
+    }
+
     public onFormSubmit(data: any): void {
         //Todo
     }

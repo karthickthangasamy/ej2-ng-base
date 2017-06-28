@@ -72,7 +72,6 @@ export class ComponentBase<T> {
         }
     }
 
-
     protected registerEvents(eventList: string[]): void {
         let ngEventsEmitter: { [key: string]: Object } = {};
         if (eventList && eventList.length) {

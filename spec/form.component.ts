@@ -9,9 +9,9 @@ import { DemoBase } from './sample.core';
  * Form Component
  */
 @Component({
-    selector: 'ej2-button',
+    selector: 'ej2-button,[ej2-button]',
     inputs: ['text', 'height', 'width', 'value'],
-    outputs: ['click'],
+    outputs: ['click', 'focus', 'blur'],
     template: '',
     providers: [
         {
@@ -35,9 +35,9 @@ export class DemoFormComponent extends DemoBase implements IComponentBase {
     public addTwoWay: (propList: string[]) => void;
 }
 
-applyMixins(DemoFormComponent, [FormBase, ComponentBase]);
+applyMixins(DemoFormComponent, [ComponentBase, FormBase]);
 
 
 // //TO Cover coverage
 let formCmpt: FormBase<any> = new FormBase();
-formCmpt.localChange({ value: 'new' });;
+formCmpt.localChange({ value: 'new' });
