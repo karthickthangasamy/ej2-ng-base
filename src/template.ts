@@ -20,7 +20,6 @@ export function Template<T>(): PropertyDecorator {
 function setter(key: string): Function {
     return function (val: AngularElementType): void {
         if (val === undefined) { return; }
-        val.elementRef.nativeElement._viewContainerRef = this.viewContainerRef;
         setValue(key + 'Ref', val, this);
     };
 }

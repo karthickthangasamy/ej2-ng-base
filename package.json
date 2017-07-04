@@ -50,6 +50,10 @@
 		"phantomjs-prebuilt": "^2.1.14",
 		"simple-odata-server": "^0.3.1"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/syncfusion/ej2-ng-base.git"
+	},
 	"scripts": {
 		"build": "gulp build",
 		"test": "gulp test"
