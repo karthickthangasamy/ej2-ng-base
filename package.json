@@ -13,7 +13,7 @@
 		"@angular/platform-browser": "2.2.1 - 4.10.0",
 		"@angular/platform-browser-dynamic": "2.2.1 - 4.10.0",
 		"@angular/router": "2.2.1 - 4.10.0",
-		"@syncfusion/ej2-base": "^1.0.0",
+		"@syncfusion/ej2-base": "*",
 		"zone.js": "^0.7.2",
 		"core-js": "^2.4.1",
 		"reflect-metadata": "^0.1.9",
