@@ -1,4 +1,8 @@
-# 1.0.0 (2017-07-24)
+# [Unreleased]
+
+## New Features
+- Angular template support has been added.
+
 
 # 1.0.10-preview (2017-07-05)
 

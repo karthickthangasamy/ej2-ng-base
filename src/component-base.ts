@@ -2,7 +2,8 @@
  * Angular Component Base Module
  */
 import { getValue, isUndefined, setValue, isNullOrUndefined } from '@syncfusion/ej2-base/util';
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, EmbeddedViewRef } from '@angular/core';
+import { clearTemplate } from './util';
 
 export interface IComponentBase {
     registerEvents: (eventList: string[]) => void;
@@ -14,6 +15,7 @@ interface Tag {
     getProperties?: Function;
     isInitChanges: boolean;
     list: TagList[];
+    clearTemplate?: (arg: string[]) => void;
 }
 
 interface TagList {
@@ -31,8 +33,10 @@ export class ComponentBase<T> {
     public properties: Object;
     public saveChanges: Function;
     public destroy: Function;
+    private registeredTemplate: { [key: string]: EmbeddedViewRef<Object>[] };
 
     public ngOnInit(): void {
+        this.registeredTemplate = {};
         this.tags = this.tags || [];
         this.tagObjects = [];
         for (let tag of this.tags) {
@@ -45,12 +49,21 @@ export class ComponentBase<T> {
     }
 
     public ngAfterViewInit(): void {
-        this.appendTo(this.element);
+        // Used setTimeout for template binding
+        // Refer Link: https://github.com/angular/angular/issues/6005
+        setTimeout(() => {
+            this.appendTo(this.element);
+        });
     }
 
     public ngOnDestroy(): void {
         this.destroy();
+        this.clearTemplate(null);
     }
+
+    public clearTemplate(templateNames?: string[]): void {
+        clearTemplate(this, templateNames);
+    };
 
     public ngAfterContentChecked(): void {
         for (let tagObject of this.tagObjects) {

@@ -1,34 +1,27 @@
-import { DemoBase } from './sample.core';
-import { getPropArray } from '../src/util';
+import { setValue } from '../src/util';
 
 /**
- * Form Spec
+ * Component base
  */
-
-describe('=> Utils => ', () => {
-
-    it('get complex properties array', () => {
-        let props: any = (DemoBase.prototype as any).propList;
-        let propResArray: any = getPropArray(props.colProps);
-        expect(propResArray).toEqual(['childs', 'child2s']);
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+describe('=> Template Component => ', () => {
+    it('setObject function', () => {
+        let obj: any = { type: 'Fiat', model: '500', fields: { text: 'name' } };
+        setValue('check', true, obj);
+        expect(obj.check).toBe(true);
+        expect(Object.keys(obj).length).toBe(4);
     });
 
-    it('get complex properties array', () => {
-        let props: any = [{ type: { prototype: { propList: { propNames: [], complexProps: [] } } }, propertyName: 'onlyOnePorp' }];
-        let propResArray: any = getPropArray(props);
-        expect(propResArray).toEqual(['onlyOnePorp']);
+    it('setObject function namespace empty obj', () => {
+        let obj: any = {};
+        let val: any;
+        setValue('check.name', true, obj);
+        expect(obj.check.name).toBe(true);
     });
-
-
-    it('get properties array', () => {
-        let props: any = (DemoBase.prototype as any).propList.propNames;
-        expect(props).toEqual(['enablePersistence', 'enableRtl', 'locale', 'text', 'width', 'height', 'size', 'value']);
+    it('setObject function namespace value undefined', () => {
+        let obj: any = { check: {} };
+        let val: any;
+        setValue('check.name', val, obj);
+        expect(obj.check.name).toEqual({});
     });
-
-    it('get events array', () => {
-        let events: any = (DemoBase.prototype as any).propList.eventNames;
-        expect(events).toEqual(['change', 'updated']);
-    });
-
-
 });

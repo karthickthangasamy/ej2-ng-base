@@ -127,3 +127,58 @@ describe('=> Complex Component => ', () => {
     });
 
 });
+
+describe('=> Complex Component => ', () => {
+    let comp: AppComponent;
+    let fixture: ComponentFixture<AppComponent>;
+    let de: DebugElement;
+    let el: HTMLElement;
+    let directives: any[] = ControlComponents;
+    directives.push(AppComponent);
+    beforeEach((done) => {
+        TestBed.configureTestingModule({
+            declarations: directives,
+            providers: [ComponentBase]
+        });
+        /* tslint:disable */
+        TestBed.overrideComponent(AppComponent, {
+            set: {
+                template: `<ej2-control>
+                <e-childs>
+                <e-child>
+                    <e-sub-childs>
+                        <e-sub-child text='SubChild1' [header]=true ></e-sub-child>
+                        <e-sub-child text='SubChild2' [header]=true ></e-sub-child>
+                        <e-sub-child text='SubChild3' [header]=true ></e-sub-child>
+                    </e-sub-childs>
+                </e-child>
+                </e-childs>
+                </ej2-control>`
+            }
+        });
+        /* tslint:enable */
+
+        TestBed.compileComponents().then(() => {
+            fixture = TestBed.createComponent(AppComponent);
+            comp = fixture.componentInstance;
+            de = fixture.debugElement;
+            el = de.nativeElement;
+            fixture.detectChanges();
+            setTimeout(() => { done(); }, 1000);
+        });
+    });
+    it('complex data 2 level with out parent property changed', () => {
+        let instance: any = (el.querySelector('.e-control') as any).ej2_instances[0];
+        expect(JSON.stringify(instance.childs[0], (key: string, value: Object) => {
+            return instance.getActualProperties(value);
+        })).toEqual(
+            '{"subChilds":[{"header":true,"text":"SubChild1"},{"header":true,"text":"SubChild2"},' +
+            '{"header":true,"text":"SubChild3"}],"text":"Child","header":true}'
+            );
+    });
+
+    afterAll(() => {
+        el.remove();
+    });
+
+});

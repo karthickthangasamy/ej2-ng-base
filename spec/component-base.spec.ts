@@ -109,8 +109,8 @@ describe('=> Simple Component => ', () => {
         sypFunction = spyOn(comp, 'onButtonClick');
         comp.val = 'Content';
         fixture.detectChanges();
-        destroySpy = spyOn((el.firstElementChild as any).ej2_instances[0], 'destroy');
         setTimeout(() => {
+            destroySpy = spyOn((el.firstElementChild as any).ej2_instances[0], 'destroy');
             done();
         }, 50);
     });
