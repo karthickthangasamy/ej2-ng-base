@@ -65,6 +65,11 @@ describe('=> Template Component => ', () => {
         expect(keys.length).toBe(0);
     });
 
+    it('complex component template setting', () => {
+        let controlInstance: any = (el as any).querySelector('.e-control').ej2_instances[0];
+        expect(controlInstance.tooltip.template).toBe(controlInstance.tooltip_template);
+    });
+
     afterEach(() => {
         el.remove();
     });

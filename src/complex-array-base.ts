@@ -1,5 +1,5 @@
 import { QueryList, SimpleChanges, SimpleChange, EmbeddedViewRef } from '@angular/core';
-import { getValue } from '@syncfusion/ej2-base/util';
+import { getValue, setValue } from '@syncfusion/ej2-base';
 import { clearTemplate } from './util';
 
 /**
@@ -40,7 +40,7 @@ export class ComplexBase<T> {
         });
         for (let tempName of templateProperties) {
             let propName: string = tempName.replace('Ref', '');
-            this.propCollection[propName] = getValue(propName, this);
+            setValue(propName.replace('_', '.'), getValue(propName, this), this.propCollection);
         }
     }
 

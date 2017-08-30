@@ -1,7 +1,7 @@
 /**
  * Angular Component Base Module
  */
-import { getValue, isUndefined, setValue, isNullOrUndefined } from '@syncfusion/ej2-base/util';
+import { getValue, isUndefined, setValue, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EventEmitter, EmbeddedViewRef } from '@angular/core';
 import { clearTemplate } from './util';
 
@@ -34,10 +34,12 @@ export class ComponentBase<T> {
     public saveChanges: Function;
     public destroy: Function;
     private registeredTemplate: { [key: string]: EmbeddedViewRef<Object>[] };
+    private complexTemplate: string[];
 
     public ngOnInit(): void {
         this.registeredTemplate = {};
         this.tags = this.tags || [];
+        this.complexTemplate = this.complexTemplate || [];
         this.tagObjects = [];
         for (let tag of this.tags) {
             let tagObject: { name: string, instance: Tag } = {
@@ -45,6 +47,17 @@ export class ComponentBase<T> {
                 name: tag
             };
             this.tagObjects.push(tagObject);
+        }
+
+        let complexTemplates: string[] = Object.keys(this);
+        complexTemplates = complexTemplates.filter((val: string): boolean => {
+            return /Ref$/i.test(val) && /\_/i.test(val);
+        });
+        for (let tempName of complexTemplates) {
+            let propName: string = tempName.replace('Ref', '');
+            let val: Object = {};
+            setValue(propName.replace('_', '.'), getValue(propName, this), val);
+            this.setProperties(val, true);
         }
     }
 

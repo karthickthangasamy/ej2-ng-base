@@ -6,7 +6,7 @@ import {
 import { ComponentBase, IComponentBase } from '../src/component-base';
 import { ComplexBase, ArrayBase } from '../src/complex-array-base'
 import { applyMixins } from '../src/util';
-import { setValue } from '@syncfusion/ej2-base/util';
+import { setValue } from '@syncfusion/ej2-base';
 import { TemplateBase } from './template.core';
 import { Template } from '../src/template';
 
@@ -62,6 +62,8 @@ export class ListItem extends ComplexBase<ListItems> {
 
     public tags: string[] = ['subChilds'];
 
+    public complexTemplate: string[] = [];
+
     constructor( @Inject(ViewContainerRef) private viewContainerRef: ViewContainerRef, ) {
         super();
         setValue('currentInstance', this, this.viewContainerRef);
@@ -97,11 +99,14 @@ export class ListItems extends ArrayBase<ListItem> {
 export class TemplateComponent extends TemplateBase implements IComponentBase {
 
     @ContentChild('template')
-    @Template("<span>Checking</span>")
+    @Template('<span>Checking</span>')
     public template: any;
 
-    public tags: string[] = ['items'];
+    @ContentChild('tooltipTemplate')
+    @Template('<span>Tooltip</span>')
+    public tooltip_template: any;
 
+    public tags: string[] = ['items'];
     constructor(
         @Inject(ElementRef) private ngEle: ElementRef,
         @Inject(ViewContainerRef) private viewContainerRef: ViewContainerRef,

@@ -2,7 +2,7 @@ import {
     Component, Complex, Collection, NotifyPropertyChanges,
     Property, INotifyPropertyChanged, ChildProperty
 } from '@syncfusion/ej2-base';
-import { append } from '@syncfusion/ej2-base/dom';
+import { append } from '@syncfusion/ej2-base';
 import { compile } from '@syncfusion/ej2-base';
 
 /**
@@ -16,6 +16,10 @@ export class TemplateBase extends Component<HTMLElement> implements INotifyPrope
 
     @Property('String')
     public template: any
+
+    public tooltip: Object = {
+        template: 'check'
+    }
 
     public items: any = [];
 

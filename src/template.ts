@@ -1,6 +1,6 @@
 import { ViewContainerRef, EmbeddedViewRef, ElementRef, TemplateRef } from '@angular/core';
 import { setTemplateEngine, getTemplateEngine } from '@syncfusion/ej2-base';
-import { setValue, getValue } from '@syncfusion/ej2-base/util';
+import { setValue, getValue } from '@syncfusion/ej2-base';
 
 let stringCompiler: (template: string, helper?: object) => (data: Object | JSON) => string = getTemplateEngine();
 

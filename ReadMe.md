@@ -1,3 +1,5 @@
+[![coverage](http://ej2.syncfusion.com/coverage/ej2-ng-base/coverage.svg)](http://ej2.syncfusion.com/coverage/ej2-ng-base)
+
 A common package of Essential JS 2 angular base, methods and class definitions. It comes with full documentation and support and is available under commercial and community licenses – please visit www.syncfusion.com to get started.
 
 ## Resources

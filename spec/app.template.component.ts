@@ -9,6 +9,9 @@ import { Component } from '@angular/core';
                <ng-template #template let-data>
                     <div class='text-template'> {{ data.name }}</div>
                </ng-template>
+               <ng-template #tooltipTemplate let-data>
+                    <div class='text-template'> {{ data.name }}</div>
+               </ng-template>
                <e-items>
                     <e-item [dataSource]='item1Data'>
                         <ng-template #template let-data>
