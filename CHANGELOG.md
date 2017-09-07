@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+## Bug Fixes
+- Model value not working with checkbox issue fixed.
+
 ## 1.0.14-preview (2017-08-31)
 
 ### Bug Fixes

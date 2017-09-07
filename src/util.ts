@@ -23,7 +23,9 @@ export function clearTemplate(_this: any, templateNames?: string[]): void {
             });
         for (let registeredTemplate of (regProperties && regProperties || regTemplates)) {
             for (let rt of _this.registeredTemplate[registeredTemplate]) {
-                rt.destroy();
+                if (!rt.destroyed) {
+                    rt.destroy();
+                }
             }
             delete _this.registeredTemplate[registeredTemplate];
         }
@@ -49,7 +51,7 @@ export function clearTemplate(_this: any, templateNames?: string[]): void {
 export function setValue(nameSpace: string, value: any, object: any): any {
     let keys: string[] = nameSpace.split('.');
     let fromObj: any = object || {};
-    for (let i:number = 0; i < keys.length; i++) {
+    for (let i: number = 0; i < keys.length; i++) {
         let key: string = keys[i];
         if (i + 1 === keys.length) {
             fromObj[key] = value === undefined ? {} : value;
