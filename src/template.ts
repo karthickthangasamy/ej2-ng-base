@@ -44,9 +44,16 @@ export function Template<T>(defaultValue?: Object): PropertyDecorator {
 function setter(key: string): Function {
     return function (val: AngularElementType): void {
         if (val === undefined) { return; }
-        val.elementRef.nativeElement._viewContainerRef = this.viewContainerRef;
-        val.elementRef.nativeElement.propName = key;
         setValue(key + 'Ref', val, this);
+        if (typeof val !== 'string') {
+            val.elementRef.nativeElement._viewContainerRef = this.viewContainerRef;
+            val.elementRef.nativeElement.propName = key;
+        } else {
+            if (this.saveChanges) {
+                this.saveChanges(key, val, undefined);
+                this.dataBind();
+            }
+        }
     };
 }
 

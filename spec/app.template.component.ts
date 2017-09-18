@@ -37,5 +37,6 @@ import { Component } from '@angular/core';
 export class TemplateApp {
     public item1Data: Object = { text: 'name' };
     public data: Object = [{ name: 'template1' }, { name: 'template2' }];
+    public tmpl:string = '<div>dataCheck</div>';
 
 }

@@ -88,7 +88,7 @@ export class ListItems extends ArrayBase<ListItem> {
  */
 @Component({
     selector: 'ej2-list',
-    inputs: ['dataSource'],
+    inputs: ['dataSource','template'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     outputs: [],
     template: '',

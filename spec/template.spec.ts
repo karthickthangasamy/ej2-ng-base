@@ -74,3 +74,43 @@ describe('=> Template Component => ', () => {
         el.remove();
     });
 });
+
+describe('=> String Template Component => ', () => {
+    let comp: TemplateApp;
+    let fixture: ComponentFixture<TemplateApp>;
+    let de: DebugElement;
+    let el: HTMLElement;
+    beforeEach((done) => {
+        TestBed.configureTestingModule({
+            declarations: [TemplateApp, TemplateComponent,
+                ListItem, ListItems, SubListItem, SubListItems]
+        });
+
+        /* tslint:disable */
+        TestBed.overrideComponent(TemplateApp, {
+            set: {
+                template: `<ej2-list [dataSource]='data' [template]='tmpl'>
+                
+     </ej2-list>`
+            }
+        });
+        /* tslint:enable */
+
+        TestBed.compileComponents().then(() => {
+            fixture = TestBed.createComponent(TemplateApp);
+            comp = fixture.componentInstance;
+            de = fixture.debugElement;
+            el = de.nativeElement;
+            fixture.detectChanges();
+            setTimeout(() => { done(); }, 100);
+        });
+    });
+    it('string template', () => {
+        expect((el.querySelector('.e-control') as any).ej2_instances[0].template).toBe('<div>dataCheck</div>');
+    });
+
+    
+    afterEach(() => {
+        el.remove();
+    });
+});
