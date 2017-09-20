@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## 1.0.18-preview (2017-09-20)
+
 ### Bug Fixes
 - Template setter for string type issue fixed.
 
