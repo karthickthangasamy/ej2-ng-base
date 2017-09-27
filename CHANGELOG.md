@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Bug Fixes
+- Form control's `checked` property will return `false` instead of `undefined`.
+
 ## 1.0.18-preview (2017-09-20)
 
 ### Bug Fixes

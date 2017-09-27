@@ -3,6 +3,7 @@ import { DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DemoFormComponent } from './form.component';
 import { AppComponent } from './app.module';
+import { FormBase } from '../src/form-base'
 
 /**
  * Form Spec
@@ -82,3 +83,24 @@ describe('=> Form Component => ', () => {
     });
 
 });
+
+describe('Form Base Coverage Test', () => {
+    it("Check state test case with true", () => {
+        let formCmpt: FormBase<any> = new FormBase();
+        formCmpt.propagateChange = jasmine.createSpy('propagateChange');
+        formCmpt.localChange({ checked: true });
+        expect(formCmpt.propagateChange).toHaveBeenCalledWith(true);
+    });
+    it("Check state test case with false", () => {
+        let formCmpt: FormBase<any> = new FormBase();
+        formCmpt.propagateChange = jasmine.createSpy('propagateChange');
+        formCmpt.localChange({ checked: false });
+        expect(formCmpt.propagateChange).toHaveBeenCalledWith(false);
+    });
+    it("Check state test case with value", () => {
+        let formCmpt: FormBase<any> = new FormBase();
+        formCmpt.propagateChange = jasmine.createSpy('propagateChange');
+        formCmpt.localChange({ value: 'one' });
+        expect(formCmpt.propagateChange).toHaveBeenCalledWith('one');
+    });
+})

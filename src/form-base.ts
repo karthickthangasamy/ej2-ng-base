@@ -19,7 +19,7 @@ export class FormBase<T> implements ControlValueAccessor {
 
     public localChange(e: { value?: T, checked?: T }): void {
         if (this.propagateChange !== undefined) {
-            this.propagateChange(e.checked || e.value);
+            this.propagateChange((e.checked === undefined ? e.value : e.checked));
         }
     }
 
