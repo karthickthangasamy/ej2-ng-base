@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 /**
  * App Module
  */
 @Component({
     selector: 'temp-component',
-    template: `<ej2-list [dataSource]='data'>
+    template: `<ej2-list #comp [dataSource]='data'>
                <ng-template #template let-data>
                     <div class='text-template'> {{ data.name }}</div>
                </ng-template>
@@ -31,12 +31,19 @@ import { Component } from '@angular/core';
                     </e-item>
                </e-items>
     </ej2-list>
+    <ng-template #commonTemplate let-data>
+    <div class='text-template'> {{ data.name }}</div>
+</ng-template>
      <ej2-list id="ndList" [dataSource]='data'></ej2-list>
     `
 })
 export class TemplateApp {
     public item1Data: Object = { text: 'name' };
     public data: Object = [{ name: 'template1' }, { name: 'template2' }];
-    public tmpl:string = '<div>dataCheck</div>';
+    public tmpl: string = '<div>dataCheck</div>';
+    @ViewChild('commonTemplate')
+    public commonTemplate: any;
 
+    @ViewChild('comp')
+    public compInstance: any;
 }

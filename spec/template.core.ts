@@ -43,8 +43,9 @@ export class TemplateBase extends Component<HTMLElement> implements INotifyPrope
     private controlRender(): void {
         let templateCompiler: Function = compile(this.template);
         for (let data of this.dataSource) {
-            append(templateCompiler(data), this.element);
+            append(templateCompiler(data,this, 'template'), this.element);
         }
+
     }
 
     private compileItem(): void {

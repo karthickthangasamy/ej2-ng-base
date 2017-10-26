@@ -7,16 +7,22 @@ let stringCompiler: (template: string, helper?: object) => (data: Object | JSON)
 /**
  * Angular Template Compiler
  */
-export function compile(templateEle: AngularElementType, helper?: Object): (data: Object | JSON, helper?: Object) => Object {
+export function compile(templateEle: AngularElementType, helper?: Object):
+//tslint:disable-next-line
+    (data: Object | JSON, component?: any, propName?: any) => Object {
     if (typeof templateEle === 'string') {
         return stringCompiler(templateEle, helper);
     } else {
         let contRef: ViewContainerRef = templateEle.elementRef.nativeElement._viewContainerRef;
-        let propName: string = templateEle.elementRef.nativeElement.propName;
-        return (data: Object): Object => {
+        let pName: string = templateEle.elementRef.nativeElement.propName;
+        //tslint:disable-next-line        
+        return (data: Object, component?: any, propName?: any): Object => {
             let context: Object = { $implicit: data };
-            let viewRef: EmbeddedViewRef<Object> = contRef.createEmbeddedView(templateEle as TemplateRef<Object>, context);
-            let viewCollection: { [key: string]: EmbeddedViewRef<Object>[] } = getValue('currentInstance.registeredTemplate', contRef);
+            let conRef: ViewContainerRef = contRef ? contRef : component.viewContainerRef;
+            let viewRef: EmbeddedViewRef<Object> = conRef.createEmbeddedView(templateEle as TemplateRef<Object>, context);
+            let viewCollection: { [key: string]: EmbeddedViewRef<Object>[] } = component ?
+                component.registeredTemplate : getValue('currentInstance.registeredTemplate', conRef);
+            propName = propName ? propName : pName;
             if (typeof viewCollection[propName] === 'undefined') {
                 viewCollection[propName] = [];
             }

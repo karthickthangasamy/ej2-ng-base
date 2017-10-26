@@ -75,6 +75,49 @@ describe('=> Template Component => ', () => {
     });
 });
 
+describe('=> Template Component => ', () => {
+    let comp: TemplateApp;
+    let fixture: ComponentFixture<TemplateApp>;
+    let de: DebugElement;
+    let el: HTMLElement;
+    beforeEach((done) => {
+        TestBed.configureTestingModule({
+            declarations: [TemplateApp, TemplateComponent,
+                ListItem, ListItems, SubListItem, SubListItems]
+        });
+        /* tslint:disable */
+        TestBed.overrideComponent(TemplateApp, {
+            set: {
+                template: `<ej2-list #comp [dataSource]='data' [template]='commonTemplate'></ej2-list>
+     <ng-template #commonTemplate let-data>
+     <div class='text-template'> {{ data.name }}</div>
+ </ng-template>`
+            }
+        });
+        /* tslint:enable */
+        TestBed.compileComponents().then(() => {
+            fixture = TestBed.createComponent(TemplateApp);
+            comp = fixture.componentInstance;
+            de = fixture.debugElement;
+            el = de.nativeElement;
+            fixture.detectChanges();
+            delete comp.compInstance.template.elementRef.nativeElement._viewContainerRef;            
+            setTimeout(() => {
+                done(); 
+            }, 100);
+        });
+    });
+    it('render with shared template', () => {
+        //Spec will throw the console error due to testbed issue
+        // https://github.com/angular/angular/issues/17013
+        expect(el.querySelectorAll('.text-template').length).toBe(2);
+    });
+
+    afterEach(() => {
+        el.remove();
+    });
+});
+
 describe('=> String Template Component => ', () => {
     let comp: TemplateApp;
     let fixture: ComponentFixture<TemplateApp>;

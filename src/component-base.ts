@@ -94,7 +94,6 @@ export class ComponentBase<T> {
                     }
                 }
             }
-
         }
     }
 
