@@ -137,3 +137,50 @@ describe('=> Simple Component => ', () => {
         el.remove();
     });
 });
+
+describe('=> Simple Component => ', () => {
+    let comp: AppComponent;
+    let fixture: ComponentFixture<AppComponent>;
+    let de: DebugElement;
+    let el: HTMLElement;
+    let spyFunction: Function;
+    beforeEach((done: Function) => {
+        TestBed.configureTestingModule({
+            declarations: [AppComponent, DemoBaseComponent],
+        });
+        fixture = TestBed.createComponent(AppComponent);
+        comp = fixture.componentInstance;
+        de = fixture.debugElement;
+        el = de.nativeElement;
+        spyFunction = jasmine.createSpy('eventHandler');
+        comp.val = 'Content';
+        fixture.detectChanges();
+        comp.component.addEventListener('updated', spyFunction)
+        setTimeout(() => {
+            done();
+        }, 50);
+    });
+
+    it('component addEventListener', (done) => {
+        comp.val = 'Test';
+        fixture.detectChanges();
+        setTimeout(() => {
+            expect(spyFunction).toHaveBeenCalled();
+            done();
+        }, 50);
+    });
+
+    it('component removeEventListener', (done) => {
+        comp.component.removeEventListener('updated', spyFunction);
+        comp.val = 'Test';
+        fixture.destroy();
+        setTimeout(() => {
+            expect(spyFunction).not.toHaveBeenCalled();
+            done();
+        }, 50);
+    });
+
+    afterAll(() => {
+        el.remove();
+    });
+});

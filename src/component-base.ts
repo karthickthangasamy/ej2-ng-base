@@ -36,8 +36,11 @@ export class ComponentBase<T> {
     private registeredTemplate: { [key: string]: EmbeddedViewRef<Object>[] };
     private complexTemplate: string[];
 
+    private ngBoundedEvents: { [key: string]: Map<object, object> };
+
     public ngOnInit(): void {
         this.registeredTemplate = {};
+        this.ngBoundedEvents = {};
         this.tags = this.tags || [];
         this.complexTemplate = this.complexTemplate || [];
         this.tagObjects = [];
@@ -128,7 +131,25 @@ export class ComponentBase<T> {
         }
     }
 
+    public addEventListener(eventName: string, handler: Function): void {
+        let eventObj: EventEmitter<Object> = getValue(eventName, this);
+        if (!isUndefined(eventObj)) {
+            if (!this.ngBoundedEvents[eventName]) {
+                this.ngBoundedEvents[eventName] = new Map();
+            }
+            this.ngBoundedEvents[eventName].set(handler, eventObj.subscribe(handler));
+        }
+    }
+
+    public removeEventListener(eventName: string, handler: Function): void {
+        let eventObj: EventEmitter<Object> = getValue(eventName, this);
+        if (!isUndefined(eventObj)) {
+            (<EventEmitter<object>>this.ngBoundedEvents[eventName].get(handler)).unsubscribe();
+        }
+    }
+
     public trigger(eventName: string, eventArgs: Object): void {
+
         let eventObj: { next: Function } = getValue(eventName, this);
         if (!isUndefined(eventObj)) {
             eventObj.next(eventArgs);
@@ -137,6 +158,8 @@ export class ComponentBase<T> {
         if (!isUndefined(localEventObj)) {
             localEventObj.call(this, eventArgs);
         }
+
     }
+
 
 }

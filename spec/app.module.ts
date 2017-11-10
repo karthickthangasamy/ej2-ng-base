@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-
+import { Component, ViewChild } from '@angular/core';
+import { DemoBaseComponent } from './sample.component'
 /**
  * App Module
  */
 @Component({
     selector: 'app-component',
     template: `
-    <ej2-button [(value)]='val' [(text)]='text' (updated)='onButtonClick()' ></ej2-button>
+    <ej2-button #component [(value)]='val' [(text)]='text' (updated)='onButtonClick()' ></ej2-button>
     <p>{{text}}</p>
     `
 })
@@ -18,6 +18,10 @@ export class AppComponent {
     public child1: Object = { text: 'Child1', header: true };
     public child2: Object = { text: 'Child2', header: false };
     public child3: Object = { text: 'Child3', header: true };
+
+    @ViewChild('component')
+    public component:DemoBaseComponent;
+
     constructor() {
         //Todo
     }
