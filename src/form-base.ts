@@ -11,6 +11,7 @@ export class FormBase<T> implements ControlValueAccessor {
     public propagateTouch: () => void;
 
     public element: HTMLElement;
+    public inputElement: HTMLInputElement;
     private ngEle: ElementRef;
     public appendTo: (ele: string | HTMLElement) => void;
 
@@ -33,10 +34,9 @@ export class FormBase<T> implements ControlValueAccessor {
 
     public ngAfterViewInit(): void {
         this.appendTo(this.element);
-        if (this.ngEle.nativeElement.nodeName.toLowerCase() !== 'input') {
-            this.element.addEventListener('focus', this.ngOnFocus.bind(this));
-            this.element.addEventListener('blur', this.ngOnBlur.bind(this));
-        }
+        let ele: HTMLElement = this.inputElement || this.element;
+        ele.addEventListener('focus', this.ngOnFocus.bind(this));
+        ele.addEventListener('blur', this.ngOnBlur.bind(this));
     }
 
     public writeValue(value: T): void {
@@ -48,6 +48,7 @@ export class FormBase<T> implements ControlValueAccessor {
     }
 
     public ngOnBlur(e: Event): void {
+        this.propagateTouch();
         this.blur.emit(e);
     }
 }
