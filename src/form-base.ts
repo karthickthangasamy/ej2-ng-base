@@ -6,6 +6,7 @@ import { ControlValueAccessor } from '@angular/forms';
  */
 export class FormBase<T> implements ControlValueAccessor {
     public value: T;
+    public checked: boolean;
 
     public propagateChange: (_: T) => void;
     public propagateTouch: () => void;
@@ -19,8 +20,10 @@ export class FormBase<T> implements ControlValueAccessor {
     public blur: EventEmitter<Object>;
 
     public localChange(e: { value?: T, checked?: T }): void {
-        if (this.propagateChange !== undefined) {
-            this.propagateChange((e.checked === undefined ? e.value : e.checked));
+        let value: T = (e.checked === undefined ? e.value : e.checked);
+        if (this.propagateChange !== undefined && value !== undefined) {
+            // Update angular from our control
+            this.propagateChange(value);
         }
     }
 
@@ -40,7 +43,17 @@ export class FormBase<T> implements ControlValueAccessor {
     }
 
     public writeValue(value: T): void {
-        this.value = value;
+        if (value === null) { return; }
+        //update control value from angular
+        if (this.checked === undefined) {
+            this.value = value;
+        } else {
+            if (typeof value === 'boolean') {
+                this.checked = value;
+            } else {
+                this.checked = value === this.value;
+            }
+        }
     }
 
     public ngOnFocus(e: Event): void {

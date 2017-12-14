@@ -83,7 +83,7 @@ export class ComponentBase<T> {
 
     public ngAfterContentChecked(): void {
         for (let tagObject of this.tagObjects) {
-            if (!isUndefined(tagObject.instance) && tagObject.instance.hasChanges) {
+            if (!isUndefined(tagObject.instance) && (tagObject.instance.isInitChanges || tagObject.instance.hasChanges)) {
                 if (tagObject.instance.isInitChanges) {
                     let propObj: { [key: string]: Object } = {};
                     propObj[tagObject.name] = tagObject.instance.getProperties();

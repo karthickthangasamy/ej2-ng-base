@@ -103,4 +103,29 @@ describe('Form Base Coverage Test', () => {
         formCmpt.localChange({ value: 'one' });
         expect(formCmpt.propagateChange).toHaveBeenCalledWith('one');
     });
+    it("write value test for checkbox", () => {
+        let formCmpt: FormBase<any> = new FormBase();
+        formCmpt.writeValue('check')
+        expect(formCmpt.value).toBe('check');
+    });
+    it("write value test for checked with boolean input", () => {
+        let formCmpt: FormBase<any> = new FormBase();
+        formCmpt.checked = false;
+        formCmpt.writeValue(true)
+        expect(formCmpt.checked).toBe(true);
+    });
+    it("write value test for checked with value input", () => {
+        let formCmpt: FormBase<any> = new FormBase();
+        formCmpt.checked = false;
+        formCmpt.value = 'name';
+        formCmpt.writeValue('name')
+        expect(formCmpt.checked).toBe(true);
+    });
+    it("write value test for checked with value false input", () => {
+        let formCmpt: FormBase<any> = new FormBase();
+        formCmpt.checked = true;
+        formCmpt.value = 'name';
+        formCmpt.writeValue('not')
+        expect(formCmpt.checked).toBe(false);
+    });
 })
