@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## 15.4.22-preview (2017-12-14)
+
 ### Bug Fixes
 
 - Grouped radio button `ngModel` binding.
