@@ -4,6 +4,12 @@
 
 ### Bug Fixes
 
+- Resolved `this.propagateTouch is not a function` console error.
+
+## 15.4.22-preview (2017-12-14)
+
+### Bug Fixes
+
 - Grouped radio button `ngModel` binding.
 - `ngFor` directive not working for component child directive.
 
