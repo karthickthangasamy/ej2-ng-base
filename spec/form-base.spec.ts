@@ -103,6 +103,12 @@ describe('Form Base Coverage Test', () => {
         formCmpt.localChange({ value: 'one' });
         expect(formCmpt.propagateChange).toHaveBeenCalledWith('one');
     });
+    it("Check state test case with propagate touch", () => {
+        let formCmpt: FormBase<any> = new FormBase();
+        formCmpt.propagateTouch();
+        formCmpt.localChange({ checked: true });
+        expect(formCmpt.propagateTouch()).toEqual(undefined);
+    });
     it("write value test for checkbox", () => {
         let formCmpt: FormBase<any> = new FormBase();
         formCmpt.writeValue('check')

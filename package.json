@@ -1,6 +1,6 @@
 {
 	"name": "@syncfusion/ej2-ng-base",
-	"version": "15.4.22",
+	"version": "15.4.26",
 	"description": "Essential JS 2 Angular Base",
 	"author": "Syncfusion Inc.",
 	"license": "SEE LICENSE IN license",
@@ -15,7 +15,7 @@
 		"@angular/router": "2.2.1 - 5.10.0"
 	},
 	"dependencies": {
-		"@syncfusion/ej2-base": "^15.4.21",
+		"@syncfusion/ej2-base": "*",
 		"zone.js": "^0.7.2",
 		"core-js": "^2.4.1",
 		"reflect-metadata": "^0.1.9",

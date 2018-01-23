@@ -8,8 +8,8 @@ export class FormBase<T> implements ControlValueAccessor {
     public value: T;
     public checked: boolean;
 
-    public propagateChange: (_: T) => void;
-    public propagateTouch: () => void;
+    public propagateChange(_: T): void { return; }
+    public propagateTouch(): void { return; }
 
     public element: HTMLElement;
     public inputElement: HTMLInputElement;
@@ -43,7 +43,6 @@ export class FormBase<T> implements ControlValueAccessor {
     }
 
     public writeValue(value: T): void {
-        if (value === null) { return; }
         //update control value from angular
         if (this.checked === undefined) {
             this.value = value;
@@ -53,6 +52,9 @@ export class FormBase<T> implements ControlValueAccessor {
             } else {
                 this.checked = value === this.value;
             }
+        }
+        if (value === null) {
+            return;
         }
     }
 

@@ -112,7 +112,7 @@ export class ArrayBase<T> {
     public getProperties(): Object[] {
         let onlyProp: Object[] = [];
         for (let item of this.list) {
-            onlyProp.push(item.getProperties());
+            onlyProp.push((<{ getProperties: Function }>item).getProperties());
         }
         return onlyProp;
     }
@@ -120,14 +120,14 @@ export class ArrayBase<T> {
     public isChanged(): boolean {
         let result: boolean = false;
         for (let item of this.list) {
-            result = result || item.hasChanges;
+            result = result || (<{ hasChanges: boolean }>item).hasChanges;
         }
         return !!this.list.length && result;
     }
 
     public clearTemplate(templateNames: string[]): void {
         for (let item of this.list) {
-            item.clearTemplate(templateNames && templateNames.map((val: string): string => {
+            (<{ clearTemplate: Function }>item).clearTemplate(templateNames && templateNames.map((val: string): string => {
                 return new RegExp(this.propertyName).test(val) ? val.replace(this.propertyName + '.', '') : val;
             }));
         }

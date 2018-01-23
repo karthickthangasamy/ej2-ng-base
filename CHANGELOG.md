@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+## 15.4.26-preview (2018-01-23)
+
+### Bug Fixes
+
+- Resolved `reactive form reset` issue.
+
+## 15.4.23-preview (2017-12-27)
+
+### Bug Fixes
+
+- Resolved `this.propagateTouch is not a function` console error.
+
+## 15.4.22-preview (2017-12-14)
+
 ### Bug Fixes
 
 - Grouped radio button `ngModel` binding.
