@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+### Bug Fixes
+
+- Fixed Form component's expression changed on template issue.
+
+## 15.4.27-preview (2018-01-30)
+
+### Bug Fixes
+
+- Fixed Form component's disabling issue.
+
 ## 15.4.26-preview (2018-01-23)
 
 ### Bug Fixes
