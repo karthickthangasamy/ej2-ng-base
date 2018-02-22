@@ -7,6 +7,7 @@ import { ControlValueAccessor } from '@angular/forms';
 export class FormBase<T> implements ControlValueAccessor {
     public value: T;
     public checked: boolean;
+    public enabled: Object;
 
     public propagateChange(_: T): void { return; }
     public propagateTouch(): void { return; }
@@ -36,10 +37,22 @@ export class FormBase<T> implements ControlValueAccessor {
     }
 
     public ngAfterViewInit(): void {
-        this.appendTo(this.element);
-        let ele: HTMLElement = this.inputElement || this.element;
-        ele.addEventListener('focus', this.ngOnFocus.bind(this));
-        ele.addEventListener('blur', this.ngOnBlur.bind(this));
+        /* istanbul ignore else  */
+        if (typeof window !== 'undefined') {
+            // Used setTimeout for template binding
+            // Refer Link: https://github.com/angular/angular/issues/6005
+            setTimeout(() => {
+                this.appendTo(this.element);
+                let ele: HTMLElement = this.inputElement || this.element;
+                ele.addEventListener('focus', this.ngOnFocus.bind(this));
+                ele.addEventListener('blur', this.ngOnBlur.bind(this));
+            });
+        }
+
+    }
+
+    public setDisabledState(disabled: boolean): void {
+        this.enabled = !disabled;
     }
 
     public writeValue(value: T): void {

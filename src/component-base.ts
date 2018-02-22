@@ -68,13 +68,19 @@ export class ComponentBase<T> {
         // Used setTimeout for template binding
         // Refer Link: https://github.com/angular/angular/issues/6005
         setTimeout(() => {
-            this.appendTo(this.element);
+            /* istanbul ignore else  */
+            if (typeof window !== 'undefined') {
+                this.appendTo(this.element);
+             }
         });
     }
 
     public ngOnDestroy(): void {
-        this.destroy();
-        this.clearTemplate(null);
+        /* istanbul ignore else  */
+        if (typeof window !== 'undefined') {
+            this.destroy();
+            this.clearTemplate(null);
+         }
     }
 
     public clearTemplate(templateNames?: string[]): void {

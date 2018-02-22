@@ -134,4 +134,9 @@ describe('Form Base Coverage Test', () => {
         formCmpt.writeValue('not')
         expect(formCmpt.checked).toBe(false);
     });
+    it("test for setDisableState", () => {
+        let formCmpt: FormBase<any> = new FormBase();
+        formCmpt.setDisabledState(true);
+        expect(formCmpt.enabled).toEqual(false);
+    });
 })
