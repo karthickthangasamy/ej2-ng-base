@@ -2,6 +2,30 @@
 
 ## [Unreleased]
 
+### New Feature
+
+- Angular Universal support added
+
+### Bug Fixes
+
+- Resolved `clearTemplate` issue.
+
+### Breaking Changes
+
+- Tag prefix for Angular components is changed from `ej` to `ejs`. For example, `ej-grid` is changed to `ejs-grid`.
+
+## 15.4.30-preview (2018-02-14)
+
+### Bug Fixes
+
+- Fixed Form component's expression changed on template issue.
+
+## 15.4.27-preview (2018-01-30)
+
+### Bug Fixes
+
+- Fixed Form component's disabling issue.
+
 ## 15.4.26-preview (2018-01-23)
 
 ### Bug Fixes
