@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## 16.1.32 (2018-03-29)
+
+### Bug Fixes
+
+- Skip form event when Focus on `blur`.
+
 ## 16.1.24 (2018-02-22)
 
 ### New Feature

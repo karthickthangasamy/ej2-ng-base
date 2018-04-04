@@ -25,7 +25,7 @@ export function clearTemplate(_this: any, templateNames?: string[]): void {
             for (let rt of _this.registeredTemplate[registeredTemplate]) {
                 if (!rt.destroyed) {
                     let pNode: any = rt._view.renderer.parentNode(rt.rootNodes[0]);
-                    for (let m: number; m < rt.rootNodes.length; m++) {
+                    for (let m: number = 0; m < rt.rootNodes.length; m++) {
                         pNode.appendChild(rt.rootNodes[m]);
                     }
                     rt.destroy();
