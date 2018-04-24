@@ -26,12 +26,31 @@ interface TagList {
 export class ComponentBase<T> {
     public element: HTMLElement;
     public tags: string[];
+
+    protected isProtectedOnChange: boolean = true;
+    protected oldProperties: { [key: string]: Object };
+    protected changedProperties: { [key: string]: Object };
+    protected finalUpdate: Function;
+
     private tagObjects: { name: string, instance: Tag }[];
     public onPropertyChanged: (newProp: Object, oldProp: Object) => void;
     public appendTo: (ele: string | HTMLElement) => void;
     public setProperties: (obj: Object, muteOnChange: boolean) => void;
     public properties: Object;
-    public saveChanges: Function;
+    public dataBind: Function;
+    protected saveChanges(key: string, newValue: Object, oldValue: Object): void {
+        if (this.isProtectedOnChange) { return; }
+        this.oldProperties[key] = oldValue;
+        this.changedProperties[key] = newValue;
+        this.finalUpdate();
+        // tslint:disable-next-line:no-any
+        let changeTime: any = setTimeout(this.dataBind.bind(this));
+        let clearUpdate: Function = () => {
+            clearTimeout(changeTime);
+        };
+        this.finalUpdate = clearUpdate;
+    };
+
     public destroy: Function;
     private registeredTemplate: { [key: string]: EmbeddedViewRef<Object>[] };
     private complexTemplate: string[];
@@ -71,7 +90,7 @@ export class ComponentBase<T> {
             /* istanbul ignore else  */
             if (typeof window !== 'undefined') {
                 this.appendTo(this.element);
-             }
+            }
         });
     }
 
@@ -80,7 +99,7 @@ export class ComponentBase<T> {
         if (typeof window !== 'undefined') {
             this.destroy();
             this.clearTemplate(null);
-         }
+        }
     }
 
     public clearTemplate(templateNames?: string[]): void {
