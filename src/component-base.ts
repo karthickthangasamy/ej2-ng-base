@@ -28,6 +28,7 @@ export class ComponentBase<T> {
     public tags: string[];
 
     protected isProtectedOnChange: boolean = true;
+    private isAngular : boolean;
     protected oldProperties: { [key: string]: Object };
     protected changedProperties: { [key: string]: Object };
     protected finalUpdate: Function;
@@ -60,6 +61,7 @@ export class ComponentBase<T> {
     public ngOnInit(): void {
         this.registeredTemplate = {};
         this.ngBoundedEvents = {};
+        this.isAngular = true;
         this.tags = this.tags || [];
         this.complexTemplate = this.complexTemplate || [];
         this.tagObjects = [];
@@ -96,7 +98,7 @@ export class ComponentBase<T> {
 
     public ngOnDestroy(): void {
         /* istanbul ignore else  */
-        if (typeof window !== 'undefined') {
+        if (typeof window !== 'undefined' && this.element.classList.contains('e-control')) {
             this.destroy();
             this.clearTemplate(null);
         }
