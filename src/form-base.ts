@@ -41,15 +41,12 @@ export class FormBase<T> implements ControlValueAccessor {
         // Used setTimeout for template binding
         // Refer Link: https://github.com/angular/angular/issues/6005
         setTimeout(() => {
-            /* istanbul ignore else  */
+            /* istanbul ignore else */
             if (typeof window !== 'undefined') {
                 this.appendTo(this.element);
                 let ele: HTMLElement = this.inputElement || this.element;
-                /* istanbul ignore else  */
-                if (this.skipFromEvent !== true) {
-                    ele.addEventListener('focus', this.ngOnFocus.bind(this));
-                    ele.addEventListener('blur', this.ngOnBlur.bind(this));
-                }
+                ele.addEventListener('focus', this.ngOnFocus.bind(this));
+                ele.addEventListener('blur', this.ngOnBlur.bind(this));
             }
         });
     }
@@ -75,11 +72,17 @@ export class FormBase<T> implements ControlValueAccessor {
     }
 
     public ngOnFocus(e: Event): void {
-        this.focus.emit(e);
+        /* istanbul ignore else */
+        if (this.skipFromEvent !== true) {
+            this.focus.emit(e);
+        }
     }
 
     public ngOnBlur(e: Event): void {
         this.propagateTouch();
-        this.blur.emit(e);
+        /* istanbul ignore else */
+        if (this.skipFromEvent !== true) {
+            this.blur.emit(e);
+        }
     }
 }

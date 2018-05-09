@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## 16.1.41 (2018-05-09)
+
+### common
+
+#### Bug Fixes
+
+- Propagate touch on `blur` issue is fixed.
+
 ## 16.1.38 (2018-05-02)
 
 ### common
